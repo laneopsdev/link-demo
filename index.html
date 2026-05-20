@@ -6,13 +6,19 @@
 <title>RunUp</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
 body{
   min-height:100vh;
   overflow-x:hidden;
   font-family:Arial,Helvetica,sans-serif;
   color:white;
+
   background:
     radial-gradient(circle at top,rgba(179,54,255,.45),transparent 34%),
     radial-gradient(circle at bottom,rgba(0,194,255,.16),transparent 34%),
@@ -26,12 +32,19 @@ body{
   padding:18px 16px 220px;
 }
 
-.logo-wrap{text-align:center;margin:12px 0 22px}
+/* ================= LOGO ================= */
+
+.logo-wrap{
+  text-align:center;
+  margin-top:12px;
+  margin-bottom:22px;
+}
 
 .logo{
   font-size:64px;
   font-weight:900;
   letter-spacing:-4px;
+
   background:linear-gradient(90deg,#ff47d6,#7c5cff,#41c8ff);
   -webkit-background-clip:text;
   color:transparent;
@@ -53,15 +66,25 @@ body{
   color:#ffdfff;
 }
 
+/* ================= MAIN WRAP ================= */
+
 .phone{
   border-radius:38px;
-  background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02)),#0a0618;
+
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02)),
+    #0a0618;
+
   border:2px solid rgba(255,255,255,.09);
+
   padding:18px 18px 36px;
-  box-shadow:0 0 50px rgba(177,77,255,.25),inset 0 0 25px rgba(255,255,255,.035);
+
+  box-shadow:
+    0 0 50px rgba(177,77,255,.25),
+    inset 0 0 25px rgba(255,255,255,.035);
 }
 
-.left-panel,.right-panel{display:contents}
+/* ================= TOP ================= */
 
 .top{
   display:flex;
@@ -70,7 +93,11 @@ body{
   margin-bottom:18px;
 }
 
-.left-status{display:flex;gap:10px;align-items:center}
+.left-status{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
 
 .live{
   background:#ff1f64;
@@ -90,33 +117,72 @@ body{
   font-size:16px;
 }
 
-.menu{font-size:34px;color:#ddd1ff}
+.menu{
+  font-size:34px;
+  color:#ddd1ff;
+}
+
+/* ================= PANELS ================= */
+
+.left-panel,
+.right-panel{
+  display:flex;
+  flex-direction:column;
+}
+
+/* ================= AI BOX ================= */
 
 .ai-box{
   display:flex;
   align-items:center;
   gap:14px;
+
   background:rgba(255,255,255,.065);
   border:1px solid rgba(255,255,255,.09);
+
   border-radius:26px;
   padding:16px;
   margin-bottom:20px;
+
   box-shadow:0 0 26px rgba(170,0,255,.18);
 }
 
 .bot{
-  width:58px;height:58px;flex:0 0 58px;
+  width:58px;
+  height:58px;
+  flex:0 0 58px;
+
   border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
   font-size:28px;
+
   background:linear-gradient(135deg,#7c3aed,#ff4dd2);
+
   box-shadow:0 0 24px rgba(255,77,210,.45);
 }
 
-.ai-title{font-size:21px;font-weight:900;margin-bottom:6px}
-.ai-sub{color:#ddd1f6;font-size:16px;line-height:1.35}
+.ai-title{
+  font-size:21px;
+  font-weight:900;
+  margin-bottom:6px;
+}
 
-.listen-section{text-align:center;margin-top:8px}
+.ai-sub{
+  color:#ddd1f6;
+  font-size:16px;
+  line-height:1.35;
+}
+
+/* ================= MIC ================= */
+
+.listen-section{
+  text-align:center;
+  margin-top:8px;
+}
 
 .mic-wrap{
   position:relative;
@@ -128,16 +194,22 @@ body{
 .sound-bars{
   position:absolute;
   inset:0;
+
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
 
 .bar{
-  width:7px;height:78px;
+  width:7px;
+  height:78px;
+
   border-radius:30px;
+
   background:linear-gradient(to top,#ff35d6,#9b5cff,#38bdf8);
+
   opacity:.75;
+
   animation:barPulse 1.1s infinite ease-in-out;
 }
 
@@ -150,18 +222,31 @@ body{
 .mic-ring{
   position:absolute;
   inset:26px;
+
   border-radius:50%;
+
   background:linear-gradient(135deg,#ff39d8,#7c5cff,#3cc8ff);
+
   padding:9px;
+
   animation:micGlow 2.4s infinite ease-in-out;
-  box-shadow:0 0 38px rgba(255,57,216,.45),0 0 70px rgba(60,200,255,.18);
+
+  box-shadow:
+    0 0 38px rgba(255,57,216,.45),
+    0 0 70px rgba(60,200,255,.18);
 }
 
 .mic-inner{
-  width:100%;height:100%;
+  width:100%;
+  height:100%;
   border-radius:50%;
+
   background:#05030d;
-  display:flex;align-items:center;justify-content:center;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
   font-size:72px;
 }
 
@@ -172,12 +257,17 @@ body{
   font-weight:900;
 }
 
+/* ================= CARDS ================= */
+
 .card{
   margin-top:20px;
+
   background:rgba(255,255,255,.055);
   border:1px solid rgba(255,255,255,.09);
+
   border-radius:30px;
   padding:20px;
+
   box-shadow:0 20px 40px rgba(0,0,0,.35);
 }
 
@@ -189,29 +279,51 @@ body{
   font-size:12px;
 }
 
-.momentum{font-size:28px;font-weight:900;margin-bottom:16px}
+.momentum{
+  font-size:28px;
+  font-weight:900;
+  margin-bottom:16px;
+}
 
 .gauge{
   position:relative;
   height:128px;
+
   display:flex;
   justify-content:center;
   align-items:end;
 }
 
 .arc{
-  width:225px;height:112px;
+  width:225px;
+  height:112px;
+
   border-radius:225px 225px 0 0;
+
   border-top:18px solid #ff3dd8;
   border-left:18px solid #9b5cff;
   border-right:18px solid #23d3c2;
   border-bottom:none;
+
   filter:drop-shadow(0 0 18px rgba(255,57,216,.45));
 }
 
-.score{position:absolute;bottom:0;text-align:center}
-.score h1{font-size:66px;line-height:.9}
-.score span{color:#8f87a8;font-weight:800;font-size:18px}
+.score{
+  position:absolute;
+  bottom:0;
+  text-align:center;
+}
+
+.score h1{
+  font-size:66px;
+  line-height:.9;
+}
+
+.score span{
+  color:#8f87a8;
+  font-weight:800;
+  font-size:18px;
+}
 
 .chat-status{
   margin-top:8px;
@@ -220,19 +332,46 @@ body{
   font-size:15px;
 }
 
+/* ================= HOT ================= */
+
 .hot-mode{
   margin-top:20px;
+
   padding:16px;
   border-radius:24px;
-  background:linear-gradient(135deg,rgba(255,31,100,.2),rgba(124,58,237,.18));
+
+  background:linear-gradient(
+    135deg,
+    rgba(255,31,100,.2),
+    rgba(124,58,237,.18)
+  );
+
   border:1px solid rgba(255,255,255,.09);
 }
 
-.hot-mode strong{display:block;font-size:18px;margin-bottom:5px}
-.hot-mode span{color:#d8cffa;font-size:14px}
+.hot-mode strong{
+  display:block;
+  font-size:18px;
+  margin-bottom:5px;
+}
 
-.suggest{position:relative;overflow:hidden;margin-bottom:12px}
-.suggest h2{font-size:30px;margin-bottom:12px}
+.hot-mode span{
+  color:#d8cffa;
+  font-size:14px;
+}
+
+/* ================= SUGGEST ================= */
+
+.suggest{
+  position:relative;
+  overflow:hidden;
+  margin-bottom:12px;
+}
+
+.suggest h2{
+  font-size:30px;
+  margin-bottom:12px;
+}
 
 .suggest p{
   color:#d8cffa;
@@ -245,39 +384,59 @@ body{
   position:absolute;
   right:22px;
   top:72px;
+
   font-size:56px;
+
   filter:drop-shadow(0 0 18px rgba(56,189,248,.45));
 }
 
 .cta{
   width:100%;
   margin-top:26px;
+
   border:none;
+
   padding:18px;
+
   border-radius:22px;
+
   font-size:17px;
   font-weight:900;
   color:white;
+
   background:linear-gradient(90deg,#6d28d9,#ff47d6);
+
   box-shadow:0 0 24px rgba(255,71,214,.35);
 }
+
+/* ================= NAV ================= */
 
 .bottom-nav{
   position:fixed;
   left:50%;
   bottom:6px;
+
   transform:translateX(-50%);
+
   width:90%;
   max-width:405px;
+
   background:rgba(8,4,20,.96);
+
   border:1px solid rgba(255,255,255,.1);
+
   backdrop-filter:blur(16px);
+
   border-radius:28px;
+
   padding:11px 10px;
+
   display:flex;
   justify-content:space-between;
   align-items:center;
+
   z-index:999;
+
   box-shadow:0 0 35px rgba(0,0,0,.45);
 }
 
@@ -294,65 +453,103 @@ body{
   margin-bottom:3px;
 }
 
-.nav-item.active{color:#ff47d6}
+.nav-item.active{
+  color:#ff47d6;
+}
 
 .plus{
-  width:62px;height:62px;
+  width:62px;
+  height:62px;
+
   border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
   font-size:42px;
   font-weight:300;
+
   background:linear-gradient(135deg,#7c3aed,#ff4dd2);
-  box-shadow:0 0 28px rgba(255,77,210,.5),0 0 50px rgba(124,58,237,.24);
+
+  box-shadow:
+    0 0 28px rgba(255,77,210,.5),
+    0 0 50px rgba(124,58,237,.24);
+
   transform:translateY(-17px);
 }
 
-/* TABLET / DESKTOP SPLIT LAYOUT */
+/* ================= TABLET ================= */
+
 @media(min-width:768px){
-  body{overflow:hidden}
+
+  body{
+    overflow:hidden;
+  }
 
   .app{
-    max-width:980px;
-    padding:18px 110px 18px 28px;
+    max-width:1150px;
+    padding:6px 110px 10px 28px;
   }
 
   .logo-wrap{
-    margin-top:0;
-    margin-bottom:14px;
+    margin-top:-8px;
+    margin-bottom:8px;
   }
 
-  .logo{font-size:54px}
-  .sub{font-size:10px}
-  .tagline{font-size:24px;margin-top:8px}
+  .logo{
+    font-size:54px;
+  }
+
+  .sub{
+    font-size:10px;
+  }
+
+  .tagline{
+    margin-top:6px;
+    font-size:24px;
+  }
 
   .phone{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:16px;
-    padding:18px;
+
+    padding:14px;
     border-radius:34px;
-    max-height:calc(100vh - 138px);
+
+    max-height:calc(100vh - 90px);
+
+    align-items:start;
   }
 
-  .left-panel,.right-panel{
-    display:flex;
-    flex-direction:column;
-    gap:14px;
+  .left-panel,
+  .right-panel{
+    gap:12px;
   }
 
-  .top,.ai-box,.listen-section,.card,.hot-mode,.suggest{
+  .top,
+  .ai-box,
+  .card,
+  .hot-mode,
+  .suggest{
     margin:0;
   }
 
-  .top{margin-bottom:0}
+  .listen-section{
+    margin-top:0;
+  }
 
-  .live,.pill{
+  .live,
+  .pill{
     font-size:13px;
     padding:8px 10px;
     border-radius:14px;
   }
 
-  .menu{font-size:28px}
+  .menu{
+    font-size:28px;
+  }
 
   .ai-box{
     padding:13px;
@@ -360,18 +557,18 @@ body{
   }
 
   .bot{
-    width:46px;height:46px;flex:0 0 46px;
+    width:46px;
+    height:46px;
+    flex:0 0 46px;
     font-size:22px;
   }
 
-  .ai-title{font-size:18px}
-  .ai-sub{font-size:13px}
+  .ai-title{
+    font-size:18px;
+  }
 
-  .listen-section{
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+  .ai-sub{
+    font-size:13px;
   }
 
   .mic-wrap{
@@ -379,7 +576,14 @@ body{
     height:210px;
   }
 
-  .mic-inner{font-size:62px}
+  .mic-inner{
+    font-size:62px;
+  }
+
+  .listen-text{
+    margin-top:6px;
+    font-size:16px;
+  }
 
   .card{
     padding:16px;
@@ -391,18 +595,26 @@ body{
     margin-bottom:8px;
   }
 
-  .gauge{height:100px}
+  .gauge{
+    height:100px;
+  }
 
   .arc{
     width:180px;
     height:90px;
+
     border-top-width:15px;
     border-left-width:15px;
     border-right-width:15px;
   }
 
-  .score h1{font-size:52px}
-  .score span{font-size:14px}
+  .score h1{
+    font-size:52px;
+  }
+
+  .score span{
+    font-size:14px;
+  }
 
   .chat-status{
     font-size:13px;
@@ -414,8 +626,14 @@ body{
     border-radius:22px;
   }
 
-  .suggest h2{font-size:24px}
-  .suggest p{font-size:14px;max-width:240px}
+  .suggest h2{
+    font-size:24px;
+  }
+
+  .suggest p{
+    font-size:14px;
+    max-width:240px;
+  }
 
   .rocket{
     top:58px;
@@ -433,28 +651,42 @@ body{
     right:22px;
     top:50%;
     bottom:auto;
+
     transform:translateY(-50%);
+
     width:78px;
     max-width:none;
+
     padding:14px 9px;
+
     flex-direction:column;
     gap:12px;
+
     border-radius:28px;
+
     background:rgba(8,4,20,.9);
-    box-shadow:0 0 32px rgba(255,71,214,.28),inset 0 0 0 1px rgba(255,255,255,.08);
+
+    box-shadow:
+      0 0 32px rgba(255,71,214,.28),
+      inset 0 0 0 1px rgba(255,255,255,.08);
   }
 
   .nav-item{
     width:58px;
     min-height:54px;
+
     font-size:10px;
+
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
   }
 
-  .nav-item span{font-size:22px}
+  .nav-item span{
+    font-size:22px;
+  }
+
   .plus{
     width:58px;
     height:58px;
@@ -463,31 +695,82 @@ body{
   }
 }
 
+/* ================= SMALL PHONES ================= */
+
 @media(max-width:390px){
-  .logo{font-size:56px}
-  .tagline{font-size:26px}
-  .phone{padding:15px 15px 34px}
-  .pill,.live{font-size:14px;padding:9px 11px}
-  .ai-title{font-size:19px}
-  .ai-sub{font-size:15px}
-  .bottom-nav{width:91%;bottom:4px}
-  .plus{width:58px;height:58px;font-size:40px}
+
+  .logo{
+    font-size:56px;
+  }
+
+  .tagline{
+    font-size:26px;
+  }
+
+  .phone{
+    padding:15px 15px 34px;
+  }
+
+  .pill,
+  .live{
+    font-size:14px;
+    padding:9px 11px;
+  }
+
+  .ai-title{
+    font-size:19px;
+  }
+
+  .ai-sub{
+    font-size:15px;
+  }
+
+  .bottom-nav{
+    width:91%;
+    bottom:4px;
+  }
+
+  .plus{
+    width:58px;
+    height:58px;
+    font-size:40px;
+  }
 }
 
+/* ================= ANIMATIONS ================= */
+
 @keyframes barPulse{
-  0%,100%{transform:scaleY(.65);opacity:.3}
-  50%{transform:scaleY(1.18);opacity:1}
+  0%,100%{
+    transform:scaleY(.65);
+    opacity:.3;
+  }
+
+  50%{
+    transform:scaleY(1.18);
+    opacity:1;
+  }
 }
 
 @keyframes micGlow{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.035)}
+  0%,100%{
+    transform:scale(1);
+  }
+
+  50%{
+    transform:scale(1.035);
+  }
 }
 
 @keyframes livePulse{
-  0%,100%{box-shadow:0 0 0 rgba(255,31,100,0)}
-  50%{box-shadow:0 0 24px rgba(255,31,100,.55)}
+  0%,100%{
+    box-shadow:0 0 0 rgba(255,31,100,0);
+  }
+
+  50%{
+    box-shadow:0 0 24px rgba(255,31,100,.55);
+  }
 }
+
 </style>
 </head>
 
@@ -506,33 +789,54 @@ body{
     <div class="left-panel">
 
       <div class="top">
+
         <div class="left-status">
           <div class="live">● LIVE</div>
           <div class="pill">01:24:17</div>
           <div class="pill">👁 142</div>
         </div>
+
         <div class="menu">☰</div>
+
       </div>
 
       <div class="ai-box">
+
         <div class="bot">👾</div>
+
         <div>
           <div class="ai-title">RunUp is listening...</div>
-          <div class="ai-sub" id="aiText">I’ll help you keep the energy high 😌</div>
+
+          <div class="ai-sub" id="aiText">
+            Chat is moving fast — keep them engaged 🔥
+          </div>
         </div>
+
       </div>
 
       <div class="listen-section">
+
         <div class="mic-wrap">
+
           <div class="sound-bars">
-            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
-            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
           </div>
+
           <div class="mic-ring">
             <div class="mic-inner">🎙️</div>
           </div>
+
         </div>
-        <div class="listen-text">Listening to you & chat</div>
+
+        <div class="listen-text">
+          Listening to you & chat
+        </div>
+
       </div>
 
     </div>
@@ -540,94 +844,187 @@ body{
     <div class="right-panel">
 
       <div class="card">
-        <div class="label">CURRENT MOMENTUM</div>
-        <div class="momentum" id="momentumText">Going strong! 🔥</div>
 
-        <div class="gauge">
-          <div class="arc"></div>
-          <div class="score">
-            <h1 id="score">87</h1>
-            <span>/100</span>
-          </div>
+        <div class="label">
+          CURRENT MOMENTUM
         </div>
 
-        <div class="chat-status" id="chatStatus">Chat is active and engaged</div>
+        <div class="momentum" id="momentumText">
+          Going strong! 🔥
+        </div>
+
+        <div class="gauge">
+
+          <div class="arc"></div>
+
+          <div class="score">
+            <h1 id="score">88</h1>
+            <span>/100</span>
+          </div>
+
+        </div>
+
+        <div class="chat-status" id="chatStatus">
+          Chat is active and engaged
+        </div>
+
       </div>
 
       <div class="hot-mode">
+
         <strong>🔥 Hot streak detected</strong>
-        <span>Viewers are still engaged. This is a good moment to run something stronger.</span>
+
+        <span>
+          Viewers are still engaged. This is a good moment to run something stronger.
+        </span>
+
       </div>
 
       <div class="card suggest">
-        <div class="label">⚡ RUNUP SUGGESTS</div>
-        <h2 id="suggestTitle">Run a Premium Item</h2>
-        <p id="suggestText">Chat energy is high and you haven’t run a high-ticket item in a while.</p>
+
+        <div class="label">
+          ⚡ RUNUP SUGGESTS
+        </div>
+
+        <h2 id="suggestTitle">
+          Run a Premium Item
+        </h2>
+
+        <p id="suggestText">
+          Chat energy is high and you haven’t run a high-ticket item in a while.
+        </p>
+
         <div class="rocket">🚀</div>
 
-        <button class="cta" onclick="nextSuggestion()">Show Me What to Run →</button>
+        <button class="cta" onclick="nextSuggestion()">
+          Show Me What to Run →
+        </button>
+
       </div>
 
     </div>
 
   </div>
+
 </div>
 
 <div class="bottom-nav">
-  <div class="nav-item active"><span>⌂</span>Home</div>
-  <div class="nav-item"><span>📷</span>Scanner</div>
+
+  <div class="nav-item active">
+    <span>⌂</span>
+    Home
+  </div>
+
+  <div class="nav-item">
+    <span>📷</span>
+    Scanner
+  </div>
+
   <div class="plus">+</div>
-  <div class="nav-item"><span>🕘</span>History</div>
-  <div class="nav-item"><span>▮▮▮</span>Insights</div>
+
+  <div class="nav-item">
+    <span>🕘</span>
+    History
+  </div>
+
+  <div class="nav-item">
+    <span>▮▮▮</span>
+    Insights
+  </div>
+
 </div>
 
 <script>
+
 const aiLines = [
-  "I’ll help you keep the energy high 😌",
   "Chat is moving fast — keep them engaged 🔥",
   "Someone asked about price. Good time to clarify.",
   "Energy is climbing. Don’t slow down now.",
-  "Try a quick bundle before attention drops."
+  "Try a quick bundle before attention drops.",
+  "Momentum is building. Push something stronger."
 ];
 
 const suggestions = [
-  {title:"Run a Premium Item",text:"Chat energy is high and you haven’t run a high-ticket item in a while."},
-  {title:"Offer a Quick Bundle",text:"A few viewers are active. Bundle two items and create urgency."},
-  {title:"Call Out the Chat",text:"Ask viewers what they want next. Engagement is your leverage right now."},
-  {title:"Do a Fast Countdown",text:"Momentum is hot. A short countdown can push hesitation into bids."}
+  {
+    title:"Run a Premium Item",
+    text:"Chat energy is high and you haven’t run a high-ticket item in a while."
+  },
+  {
+    title:"Offer a Quick Bundle",
+    text:"A few viewers are active. Bundle two items and create urgency."
+  },
+  {
+    title:"Call Out the Chat",
+    text:"Ask viewers what they want next. Engagement is your leverage right now."
+  },
+  {
+    title:"Do a Fast Countdown",
+    text:"Momentum is hot. A short countdown can push hesitation into bids."
+  }
 ];
 
 let aiIndex = 0;
 let suggestIndex = 0;
-let score = 87;
+let score = 88;
 
 setInterval(() => {
+
   aiIndex = (aiIndex + 1) % aiLines.length;
-  document.getElementById("aiText").textContent = aiLines[aiIndex];
-}, 3500);
+
+  document.getElementById("aiText").textContent =
+    aiLines[aiIndex];
+
+},3500);
 
 setInterval(() => {
+
   const change = Math.floor(Math.random() * 5) - 2;
-  score = Math.max(72, Math.min(96, score + change));
+
+  score = Math.max(72,Math.min(96,score + change));
+
   document.getElementById("score").textContent = score;
 
   if(score >= 88){
-    document.getElementById("momentumText").textContent = "Going strong! 🔥";
-    document.getElementById("chatStatus").textContent = "Chat is active and engaged";
-  }else if(score >= 80){
-    document.getElementById("momentumText").textContent = "Still warm 👀";
-    document.getElementById("chatStatus").textContent = "Keep the pace moving";
-  }else{
-    document.getElementById("momentumText").textContent = "Energy dipping ⚠️";
-    document.getElementById("chatStatus").textContent = "Try a question or quick offer";
+
+    document.getElementById("momentumText").textContent =
+      "Going strong! 🔥";
+
+    document.getElementById("chatStatus").textContent =
+      "Chat is active and engaged";
   }
-}, 2500);
+
+  else if(score >= 80){
+
+    document.getElementById("momentumText").textContent =
+      "Still warm 👀";
+
+    document.getElementById("chatStatus").textContent =
+      "Keep the pace moving";
+  }
+
+  else{
+
+    document.getElementById("momentumText").textContent =
+      "Energy dipping ⚠️";
+
+    document.getElementById("chatStatus").textContent =
+      "Try a question or quick offer";
+  }
+
+},2500);
 
 function nextSuggestion(){
-  suggestIndex = (suggestIndex + 1) % suggestions.length;
-  document.getElementById("suggestTitle").textContent = suggestions[suggestIndex].title;
-  document.getElementById("suggestText").textContent = suggestions[suggestIndex].text;
+
+  suggestIndex =
+    (suggestIndex + 1) % suggestions.length;
+
+  document.getElementById("suggestTitle").textContent =
+    suggestions[suggestIndex].title;
+
+  document.getElementById("suggestText").textContent =
+    suggestions[suggestIndex].text;
 }
+
 </script>
 
 </body>
