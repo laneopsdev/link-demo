@@ -2,471 +2,609 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Runit</title>
 
 <style>
+
 *{
-  box-sizing:border-box;
   margin:0;
   padding:0;
+  box-sizing:border-box;
 }
 
 body{
-  min-height:100vh;
   background:
-    radial-gradient(circle at top, rgba(186,72,255,.35), transparent 35%),
-    radial-gradient(circle at bottom right, rgba(0,194,255,.25), transparent 35%),
-    #05030b;
-  font-family: Arial, Helvetica, sans-serif;
+    radial-gradient(circle at top, rgba(170,0,255,.35), transparent 35%),
+    #06020f;
+  font-family:Arial, Helvetica, sans-serif;
   color:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  min-height:100vh;
   overflow-x:hidden;
 }
 
-.page{
+.app{
   width:100%;
-  min-height:100vh;
-  padding:32px 16px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+  max-width:430px;
+  margin:auto;
+  padding:20px 16px 120px;
+}
+
+/* ================= LOGO ================= */
+
+.logo-wrap{
+  text-align:center;
+  margin-top:30px;
+  margin-bottom:28px;
 }
 
 .logo{
-  text-align:center;
-  margin-bottom:18px;
-}
-
-.logo h1{
-  font-size:64px;
-  line-height:.9;
+  font-size:82px;
   font-weight:900;
-  letter-spacing:-4px;
-  background:linear-gradient(90deg,#ff39d8,#8b5cf6,#38bdf8);
+  letter-spacing:-5px;
+
+  background:linear-gradient(90deg,#ff47d6,#7c5cff,#41c8ff);
   -webkit-background-clip:text;
   color:transparent;
 }
 
-.logo p{
+.sub{
   margin-top:8px;
-  font-size:13px;
-  letter-spacing:.16em;
-  color:#e7d8ff;
-  font-weight:700;
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:.2em;
+  color:#f3dcff;
 }
 
 .tagline{
-  font-size:25px;
-  font-weight:700;
+  margin-top:26px;
+  font-size:36px;
   font-style:italic;
-  margin-bottom:18px;
-  color:#ffd7ff;
-  text-shadow:0 0 18px rgba(255,57,216,.45);
+  font-weight:900;
+  color:#ffdfff;
 }
+
+/* ================= PHONE ================= */
 
 .phone{
-  width:100%;
-  max-width:390px;
-  min-height:760px;
-  border:2px solid rgba(255,255,255,.18);
+  margin-top:34px;
   border-radius:42px;
-  padding:18px;
+
   background:
-    linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02)),
-    #070512;
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
+    #0a0618;
+
+  border:2px solid rgba(255,255,255,.08);
+
+  padding:20px;
+
   box-shadow:
-    0 0 45px rgba(172,59,255,.35),
-    inset 0 0 30px rgba(255,255,255,.04);
-  position:relative;
+    0 0 50px rgba(177,77,255,.22),
+    inset 0 0 25px rgba(255,255,255,.03);
 }
 
-.status{
+/* ================= STATUS ================= */
+
+.top{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:4px 8px 18px;
-  font-size:13px;
-  color:#fff;
+  margin-bottom:22px;
 }
 
-.status-left{
+.left-status{
   display:flex;
-  gap:8px;
+  gap:12px;
   align-items:center;
 }
 
 .live{
-  background:#ff174d;
-  color:white;
-  padding:8px 12px;
-  border-radius:12px;
+  background:#ff1f64;
+  padding:12px 18px;
+  border-radius:18px;
   font-weight:900;
-  font-size:13px;
+  font-size:20px;
 }
 
 .pill{
   background:rgba(255,255,255,.08);
-  padding:8px 12px;
-  border-radius:12px;
-  color:#d9d1f5;
-  font-weight:700;
+  padding:12px 18px;
+  border-radius:18px;
+  color:#ded0ff;
+  font-weight:800;
+  font-size:20px;
 }
 
 .menu{
-  font-size:25px;
-  color:#d7cdfa;
+  font-size:42px;
+  color:#ddd1ff;
 }
 
-.message{
+/* ================= AI MESSAGE ================= */
+
+.ai-box{
   display:flex;
-  gap:12px;
-  padding:14px;
-  border-radius:18px;
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.09);
-  box-shadow:0 0 25px rgba(139,92,246,.22);
-  margin-bottom:22px;
+  align-items:center;
+  gap:16px;
+
+  background:rgba(255,255,255,.06);
+
+  border:1px solid rgba(255,255,255,.08);
+
+  border-radius:28px;
+
+  padding:18px;
+
+  margin-bottom:34px;
+
+  box-shadow:0 0 25px rgba(170,0,255,.15);
 }
 
 .bot{
-  width:42px;
-  height:42px;
+  width:74px;
+  height:74px;
   border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,#7c3aed,#ec4899);
-  box-shadow:0 0 20px rgba(236,72,153,.6);
-}
 
-.message strong{
-  display:block;
-  font-size:14px;
-  margin-bottom:4px;
-}
-
-.message span{
-  font-size:13px;
-  color:#d7cff0;
-}
-
-.listen-area{
-  text-align:center;
-  margin:22px 0 28px;
-}
-
-.wave-wrap{
-  position:relative;
-  height:220px;
   display:flex;
   align-items:center;
   justify-content:center;
+
+  font-size:34px;
+
+  background:linear-gradient(135deg,#7c3aed,#ff4dd2);
+
+  box-shadow:0 0 24px rgba(255,77,210,.45);
 }
 
-.wave{
+.ai-title{
+  font-size:26px;
+  font-weight:900;
+  margin-bottom:6px;
+}
+
+.ai-sub{
+  color:#ddd1f6;
+  font-size:20px;
+}
+
+/* ================= MIC ================= */
+
+.listen-section{
+  text-align:center;
+  margin-top:20px;
+}
+
+.mic-wrap{
+  position:relative;
+  width:260px;
+  height:260px;
+  margin:auto;
+}
+
+.sound-bars{
   position:absolute;
-  width:100%;
+  inset:0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.bar{
+  width:8px;
   height:90px;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      transparent 0 10px,
-      rgba(255,57,216,.9) 10px 14px,
-      transparent 14px 22px
-    );
-  mask-image:linear-gradient(to right, transparent, black 18%, black 82%, transparent);
-  opacity:.55;
+  border-radius:30px;
+  background:linear-gradient(to top,#ff35d6,#9b5cff);
+  opacity:.8;
   animation:pulse 1.2s infinite ease-in-out;
 }
 
+.bar:nth-child(2){animation-delay:.2s;}
+.bar:nth-child(3){animation-delay:.4s;}
+.bar:nth-child(4){animation-delay:.6s;}
+.bar:nth-child(5){animation-delay:.8s;}
+.bar:nth-child(6){animation-delay:1s;}
+
 .mic-ring{
-  width:180px;
-  height:180px;
+  position:absolute;
+  inset:25px;
+
   border-radius:50%;
+
   background:
-    conic-gradient(from 90deg,#7c3aed,#ff3dd8,#36c5ff,#7c3aed);
+    linear-gradient(135deg,#ff39d8,#7c5cff,#3cc8ff);
+
   padding:10px;
-  box-shadow:
-    0 0 40px rgba(255,57,216,.65),
-    0 0 60px rgba(56,189,248,.25);
-  z-index:2;
+
   animation:glow 2.5s infinite ease-in-out;
+
+  box-shadow:
+    0 0 40px rgba(255,57,216,.45),
+    0 0 70px rgba(60,200,255,.18);
 }
 
 .mic-inner{
   width:100%;
   height:100%;
   border-radius:50%;
-  background:#090615;
-  display:grid;
-  place-items:center;
-  font-size:74px;
+  background:#05030d;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:88px;
 }
 
-.listen-area p{
-  color:#dcd4f5;
-  font-weight:700;
-  font-size:14px;
+.listen-text{
+  margin-top:30px;
+  font-size:24px;
+  color:#e6dbff;
+  font-weight:800;
 }
+
+/* ================= MOMENTUM ================= */
 
 .card{
-  border-radius:22px;
-  padding:20px;
-  background:rgba(255,255,255,.065);
-  border:1px solid rgba(255,255,255,.1);
-  box-shadow:0 18px 40px rgba(0,0,0,.35);
-  margin-bottom:16px;
+  margin-top:34px;
+
+  background:rgba(255,255,255,.05);
+
+  border:1px solid rgba(255,255,255,.08);
+
+  border-radius:34px;
+
+  padding:24px;
+
+  box-shadow:0 20px 40px rgba(0,0,0,.35);
 }
 
 .label{
-  font-size:12px;
+  color:#9f94c3;
   letter-spacing:.08em;
-  color:#9a91b8;
   font-weight:900;
-  margin-bottom:12px;
+  margin-bottom:10px;
+  font-size:15px;
 }
 
-.momentum-title{
-  font-size:24px;
+.momentum{
+  font-size:38px;
   font-weight:900;
-  margin-bottom:16px;
+  margin-bottom:26px;
 }
 
-.meter{
-  height:110px;
+.gauge{
+  position:relative;
+  height:160px;
+
   display:flex;
   justify-content:center;
   align-items:end;
-  position:relative;
 }
 
 .arc{
-  width:210px;
-  height:105px;
-  border-radius:210px 210px 0 0;
-  border-top:18px solid #ff3dd8;
-  border-left:18px solid #8b5cf6;
-  border-right:18px solid #2dd4bf;
-  border-bottom:0;
+  width:270px;
+  height:135px;
+
+  border-radius:270px 270px 0 0;
+
+  border-top:20px solid #ff3dd8;
+  border-left:20px solid #9b5cff;
+  border-right:20px solid #23d3c2;
+  border-bottom:none;
+
   filter:drop-shadow(0 0 18px rgba(255,57,216,.45));
 }
 
 .score{
   position:absolute;
-  bottom:6px;
+  bottom:0;
   text-align:center;
 }
 
-.score b{
-  font-size:56px;
-  line-height:.8;
+.score h1{
+  font-size:90px;
+  line-height:.9;
 }
 
 .score span{
-  display:block;
-  color:#8f86a8;
+  color:#8f87a8;
   font-weight:700;
+  font-size:24px;
 }
 
-.card small{
-  display:block;
+.chat-status{
+  margin-top:10px;
   text-align:center;
-  color:#9b94ad;
-  margin-top:8px;
+  color:#a69dbd;
+  font-size:18px;
 }
+
+/* ================= SUGGESTION ================= */
 
 .suggest{
   position:relative;
   overflow:hidden;
-  background:
-    radial-gradient(circle at bottom right,rgba(255,57,216,.22),transparent 35%),
-    rgba(255,255,255,.07);
 }
 
 .suggest h2{
-  font-size:24px;
-  margin-bottom:10px;
+  font-size:42px;
+  margin-bottom:14px;
 }
 
 .suggest p{
-  color:#d6cdea;
+  color:#d8cffa;
   line-height:1.5;
-  max-width:230px;
-  font-size:15px;
+  max-width:250px;
+  font-size:22px;
 }
 
 .rocket{
   position:absolute;
   right:24px;
-  top:72px;
-  font-size:58px;
-  filter:drop-shadow(0 0 18px rgba(56,189,248,.45));
+  top:54px;
+  font-size:72px;
 }
 
 .cta{
   width:100%;
-  margin-top:22px;
+  margin-top:34px;
+
   border:none;
-  border-radius:18px;
-  padding:18px;
-  font-size:16px;
-  color:white;
+
+  padding:22px;
+
+  border-radius:24px;
+
+  font-size:22px;
   font-weight:900;
-  background:linear-gradient(90deg,#6d28d9,#ec4899);
-  box-shadow:0 0 24px rgba(236,72,153,.45);
+
+  color:white;
+
+  background:linear-gradient(90deg,#6d28d9,#ff47d6);
+
+  box-shadow:0 0 24px rgba(255,71,214,.35);
 }
 
+/* ================= NAV ================= */
+
 .bottom-nav{
-  height:72px;
-  border-radius:26px;
-  background:rgba(7,5,18,.88);
+  position:fixed;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+
+  width:92%;
+  max-width:420px;
+
+  background:rgba(10,6,24,.94);
+
   border:1px solid rgba(255,255,255,.08);
+
+  backdrop-filter:blur(16px);
+
+  border-radius:34px;
+
+  padding:18px 14px;
+
   display:flex;
-  justify-content:space-around;
+  justify-content:space-between;
   align-items:center;
-  position:sticky;
-  bottom:12px;
-  backdrop-filter:blur(12px);
+
+  z-index:999;
 }
 
 .nav-item{
   text-align:center;
-  font-size:12px;
-  color:#9c94b3;
+  color:#aaa1c6;
   font-weight:700;
+  font-size:15px;
 }
 
 .nav-item span{
   display:block;
-  font-size:24px;
-  margin-bottom:3px;
+  font-size:32px;
+  margin-bottom:5px;
 }
 
 .nav-item.active{
-  color:#d946ef;
+  color:#ff47d6;
 }
 
 .plus{
-  width:58px;
-  height:58px;
+  width:86px;
+  height:86px;
+
   border-radius:50%;
-  display:grid;
-  place-items:center;
-  font-size:36px;
-  background:linear-gradient(135deg,#7c3aed,#ec4899);
-  color:white;
-  box-shadow:0 0 28px rgba(236,72,153,.65);
-  transform:translateY(-12px);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:56px;
+  font-weight:300;
+
+  background:linear-gradient(135deg,#7c3aed,#ff4dd2);
+
+  box-shadow:
+    0 0 28px rgba(255,77,210,.45),
+    0 0 50px rgba(124,58,237,.22);
+
+  transform:translateY(-26px);
 }
 
+/* ================= ANIMATIONS ================= */
+
 @keyframes pulse{
-  0%,100%{transform:scaleY(.75);opacity:.35}
-  50%{transform:scaleY(1.15);opacity:.8}
+  0%,100%{
+    transform:scaleY(.7);
+    opacity:.35;
+  }
+  50%{
+    transform:scaleY(1.15);
+    opacity:1;
+  }
 }
 
 @keyframes glow{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.035)}
+  0%,100%{
+    transform:scale(1);
+  }
+  50%{
+    transform:scale(1.03);
+  }
 }
 
-@media(max-width:420px){
-  .logo h1{font-size:58px}
-  .phone{
-    border-radius:34px;
-    padding:15px;
-    min-height:auto;
-  }
-  .mic-ring{
-    width:165px;
-    height:165px;
-  }
-}
 </style>
 </head>
 
 <body>
 
-<div class="page">
+<div class="app">
 
-  <div class="logo">
-    <h1>runit</h1>
-    <p>AI COPILOT FOR LIVE SELLERS</p>
+  <!-- LOGO -->
+
+  <div class="logo-wrap">
+    <div class="logo">runit</div>
+    <div class="sub">AI COPILOT FOR LIVE SELLERS</div>
+    <div class="tagline">Listen. Analyze. Win.</div>
   </div>
 
-  <div class="tagline">Listen. Analyze. Win.</div>
+  <!-- APP -->
 
-  <main class="phone">
+  <div class="phone">
 
-    <div class="status">
-      <div class="status-left">
+    <!-- STATUS -->
+
+    <div class="top">
+
+      <div class="left-status">
         <div class="live">● LIVE</div>
         <div class="pill">01:24:17</div>
         <div class="pill">👁 142</div>
       </div>
+
       <div class="menu">☰</div>
+
     </div>
 
-    <div class="message">
+    <!-- AI -->
+
+    <div class="ai-box">
+
       <div class="bot">👾</div>
+
       <div>
-        <strong>Runit is listening...</strong>
-        <span>I’ll help you keep the energy high 😌</span>
+        <div class="ai-title">Runit is listening...</div>
+        <div class="ai-sub">I’ll help you keep the energy high 😌</div>
       </div>
+
     </div>
 
-    <section class="listen-area">
-      <div class="wave-wrap">
-        <div class="wave"></div>
+    <!-- MIC -->
+
+    <div class="listen-section">
+
+      <div class="mic-wrap">
+
+        <div class="sound-bars">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+
         <div class="mic-ring">
           <div class="mic-inner">🎙️</div>
         </div>
+
       </div>
-      <p>Listening to you & chat</p>
-    </section>
 
-    <section class="card">
+      <div class="listen-text">
+        Listening to you & chat
+      </div>
+
+    </div>
+
+    <!-- MOMENTUM -->
+
+    <div class="card">
+
       <div class="label">CURRENT MOMENTUM</div>
-      <div class="momentum-title">Going strong! 🔥</div>
 
-      <div class="meter">
+      <div class="momentum">
+        Going strong! 🔥
+      </div>
+
+      <div class="gauge">
+
         <div class="arc"></div>
+
         <div class="score">
-          <b>87</b>
+          <h1>87</h1>
           <span>/100</span>
         </div>
+
       </div>
 
-      <small>Chat is active and engaged</small>
-    </section>
+      <div class="chat-status">
+        Chat is active and engaged
+      </div>
 
-    <section class="card suggest">
+    </div>
+
+    <!-- SUGGESTION -->
+
+    <div class="card suggest">
+
       <div class="label">⚡ RUNIT SUGGESTS</div>
+
       <h2>Run a Premium Item</h2>
-      <p>Chat energy is high and you haven’t run a high-ticket item in a while.</p>
+
+      <p>
+        Chat energy is high and you haven’t run a high-ticket item in a while.
+      </p>
+
       <div class="rocket">🚀</div>
 
-      <button class="cta" onclick="showSuggestion()">Show Me What to Run →</button>
-    </section>
+      <button class="cta">
+        Show Me What to Run →
+      </button>
 
-    <nav class="bottom-nav">
-      <div class="nav-item active"><span>⌂</span>Home</div>
-      <div class="nav-item"><span>📷</span>Scanner</div>
-      <div class="plus">+</div>
-      <div class="nav-item"><span>🕘</span>History</div>
-      <div class="nav-item"><span>▮▮▮</span>Insights</div>
-    </nav>
+    </div>
 
-  </main>
+  </div>
 
 </div>
 
-<script>
-function showSuggestion(){
-  alert("Suggested next run: Premium item while momentum is hot 🔥");
-}
-</script>
+<!-- NAV -->
+
+<div class="bottom-nav">
+
+  <div class="nav-item active">
+    <span>⌂</span>
+    Home
+  </div>
+
+  <div class="nav-item">
+    <span>📷</span>
+    Scanner
+  </div>
+
+  <div class="plus">+</div>
+
+  <div class="nav-item">
+    <span>🕘</span>
+    History
+  </div>
+
+  <div class="nav-item">
+    <span>▮▮▮</span>
+    Insights
+  </div>
+
+</div>
 
 </body>
 </html>
