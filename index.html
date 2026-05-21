@@ -3,26 +3,58 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useSpeechRecognition } from "@/hooks/useSpeechRecognition";
 import { useSoundFX } from "@/hooks/useSoundFX";
 import { FlowSetup } from "@/components/FlowSetup";
-import { useProducerEngine, type FlowItem, getRoleEmoji, ROLE_COLORS } from "@/hooks/useProducerEngine";
+import {
+  useProducerEngine,
+  type FlowItem,
+  getRoleEmoji,
+  ROLE_COLORS,
+} from "@/hooks/useProducerEngine";
 
 const queryClient = new QueryClient();
 
 const SUGGESTIONS = [
-  { title: "Energy is climbing!", text: "Chat is reacting well. Consider a bundle or limited-time offer." },
-  { title: "Bundle question detected", text: "Someone is asking about deals. This is a good time to combine two items." },
-  { title: "Price reaction rising", text: "Viewers are responding to value. Hold attention with a quick countdown." },
-  { title: "Hot streak building", text: "You have momentum. Run something stronger before attention drops." },
-  { title: "Deal alert detected", text: "You mentioned a deal — push urgency now. Make them act in 30 seconds." },
-  { title: "Limited supply — go!", text: "You said 'limited.' Hammer the scarcity. How many are actually left?" },
-  { title: "Chat is responding", text: "Chat energy is high. Ask a direct question to keep them engaged." },
-  { title: "Sold! Keep the streak", text: "You just moved product. Ride this momentum and pitch the next item." },
+  {
+    title: "Energy is climbing!",
+    text: "Chat is reacting well. Consider a bundle or limited-time offer.",
+  },
+  {
+    title: "Bundle question detected",
+    text: "Someone is asking about deals. This is a good time to combine two items.",
+  },
+  {
+    title: "Price reaction rising",
+    text: "Viewers are responding to value. Hold attention with a quick countdown.",
+  },
+  {
+    title: "Hot streak building",
+    text: "You have momentum. Run something stronger before attention drops.",
+  },
+  {
+    title: "Deal alert detected",
+    text: "You mentioned a deal — push urgency now. Make them act in 30 seconds.",
+  },
+  {
+    title: "Limited supply — go!",
+    text: "You said 'limited.' Hammer the scarcity. How many are actually left?",
+  },
+  {
+    title: "Chat is responding",
+    text: "Chat energy is high. Ask a direct question to keep them engaged.",
+  },
+  {
+    title: "Sold! Keep the streak",
+    text: "You just moved product. Ride this momentum and pitch the next item.",
+  },
 ];
 
 const KEYWORD_MAP: Array<{ words: string[]; index: number }> = [
   { words: ["bundle", "combo", "package"], index: 1 },
   { words: ["price", "cost", "how much", "dollars", "bucks"], index: 2 },
   { words: ["deal", "discount", "off", "sale"], index: 4 },
-  { words: ["limited", "running out", "almost gone", "last few", "only"], index: 5 },
+  {
+    words: ["limited", "running out", "almost gone", "last few", "only"],
+    index: 5,
+  },
   { words: ["chat", "comments", "everyone", "you guys", "squad"], index: 6 },
   { words: ["sold", "sold out", "gone", "grabbed", "just bought"], index: 7 },
 ];
@@ -30,7 +62,7 @@ const KEYWORD_MAP: Array<{ words: string[]; index: number }> = [
 function detectKeyword(text: string): number | null {
   const lower = text.toLowerCase();
   for (const { words, index } of KEYWORD_MAP) {
-    if (words.some(w => lower.includes(w))) return index;
+    if (words.some((w) => lower.includes(w))) return index;
   }
   return null;
 }
@@ -45,13 +77,18 @@ const CATEGORY_LABELS: Record<number, string> = {
 };
 
 const CATEGORY_TAKEAWAYS: Record<string, string> = {
-  "Bundle Language": "Your audience lit up for bundles — lead with that offer next time.",
-  "Price Talk": "Viewers reacted strongest to pricing. Anchor value early next session.",
-  "Deal Energy": "Deal language drove your best moments. Open with an offer next time.",
-  "Scarcity": "Urgency worked well tonight. Create it earlier and watch sales spike.",
-  "Chat Energy": "You had real crowd energy. Keep reading the chat — it drives conversions.",
+  "Bundle Language":
+    "Your audience lit up for bundles — lead with that offer next time.",
+  "Price Talk":
+    "Viewers reacted strongest to pricing. Anchor value early next session.",
+  "Deal Energy":
+    "Deal language drove your best moments. Open with an offer next time.",
+  Scarcity:
+    "Urgency worked well tonight. Create it earlier and watch sales spike.",
+  "Chat Energy":
+    "You had real crowd energy. Keep reading the chat — it drives conversions.",
   "Sales Momentum": "You closed strong. Build that streak faster next session.",
-  "None": "Solid session. Keep building rapport with your audience — consistency wins.",
+  None: "Solid session. Keep building rapport with your audience — consistency wins.",
 };
 
 interface SummaryData {
@@ -66,26 +103,46 @@ interface SummaryData {
 function buildSummaryData(
   secs: number,
   hits: Record<string, number>,
-  score: number
+  score: number,
 ): SummaryData {
   const h = Math.floor(secs / 3600);
   const m = Math.floor((secs % 3600) / 60);
   const s = secs % 60;
-  const duration = h > 0 ? `${h}h ${m}m ${s}s` : m > 0 ? `${m}m ${s}s` : `${s}s`;
+  const duration =
+    h > 0 ? `${h}h ${m}m ${s}s` : m > 0 ? `${m}m ${s}s` : `${s}s`;
 
   const totalTriggers = Object.values(hits).reduce((a, b) => a + b, 0);
 
   let topCategory = "None";
   let topCount = 0;
   for (const [cat, count] of Object.entries(hits)) {
-    if (count > topCount) { topCategory = cat; topCount = count; }
+    if (count > topCount) {
+      topCategory = cat;
+      topCount = count;
+    }
   }
 
-  const energyRating = score >= 90 ? "Excellent" : score >= 83 ? "High" : score >= 76 ? "Good" : "Steady";
-  const energyEmoji = score >= 90 ? "🔥" : score >= 83 ? "⚡" : score >= 76 ? "💪" : "🎯";
-  const takeaway = CATEGORY_TAKEAWAYS[topCategory] ?? CATEGORY_TAKEAWAYS["None"];
+  const energyRating =
+    score >= 90
+      ? "Excellent"
+      : score >= 83
+        ? "High"
+        : score >= 76
+          ? "Good"
+          : "Steady";
+  const energyEmoji =
+    score >= 90 ? "🔥" : score >= 83 ? "⚡" : score >= 76 ? "💪" : "🎯";
+  const takeaway =
+    CATEGORY_TAKEAWAYS[topCategory] ?? CATEGORY_TAKEAWAYS["None"];
 
-  return { duration, topCategory, totalTriggers, energyRating, energyEmoji, takeaway };
+  return {
+    duration,
+    topCategory,
+    totalTriggers,
+    energyRating,
+    energyEmoji,
+    takeaway,
+  };
 }
 
 function LiveApp() {
@@ -96,12 +153,13 @@ function LiveApp() {
   const transcriptRef = useRef<HTMLDivElement>(null);
 
   // Show flow state
-  const [showFlowSetup, setShowFlowSetup] = useState(false);
+  const [view, setView] = useState<"setup" | "live">("setup");
   const [flowItems, setFlowItems] = useState<FlowItem[]>([]);
   const [currentItemIdx, setCurrentItemIdx] = useState(0);
   const [itemSeconds, setItemSeconds] = useState(0);
 
-  const { status, transcripts, interimText, start, stop, isSupported } = useSpeechRecognition();
+  const { status, transcripts, interimText, start, stop, isSupported } =
+    useSpeechRecognition();
   const { playStart, playStop } = useSoundFX();
   const isListening = status === "listening";
   const isDenied = status === "denied";
@@ -110,13 +168,6 @@ function LiveApp() {
   const [showSummary, setShowSummary] = useState(false);
   const [summary, setSummary] = useState<SummaryData | null>(null);
   const keywordHitsRef = useRef<Record<string, number>>({});
-
-  const handleSetupStart = useCallback((items: FlowItem[]) => {
-    setFlowItems(items);
-    setCurrentItemIdx(0);
-    setItemSeconds(0);
-    setShowFlowSetup(false);
-  }, []);
 
   const triggerStop = useCallback(() => {
     playStop();
@@ -160,14 +211,14 @@ function LiveApp() {
 
   // Timer
   useEffect(() => {
-    const id = setInterval(() => setSeconds(s => s + 1), 1000);
+    const id = setInterval(() => setSeconds((s) => s + 1), 1000);
     return () => clearInterval(id);
   }, []);
 
   // Viewers drift
   useEffect(() => {
     const id = setInterval(() => {
-      setViewers(v => Math.max(80, v + Math.floor(Math.random() * 14) - 6));
+      setViewers((v) => Math.max(80, v + Math.floor(Math.random() * 14) - 6));
     }, 3500);
     return () => clearInterval(id);
   }, []);
@@ -175,7 +226,9 @@ function LiveApp() {
   // Momentum score drift
   useEffect(() => {
     const id = setInterval(() => {
-      setScore(s => Math.max(72, Math.min(96, s + Math.floor(Math.random() * 5) - 2)));
+      setScore((s) =>
+        Math.max(72, Math.min(96, s + Math.floor(Math.random() * 5) - 2)),
+      );
     }, 2500);
     return () => clearInterval(id);
   }, []);
@@ -183,7 +236,7 @@ function LiveApp() {
   // AI suggestions rotate (fallback timer)
   useEffect(() => {
     const id = setInterval(() => {
-      setAiIndex(i => (i + 1) % 4); // only cycle first 4 generic ones when idle
+      setAiIndex((i) => (i + 1) % 4); // only cycle first 4 generic ones when idle
     }, 5000);
     return () => clearInterval(id);
   }, []);
@@ -206,20 +259,13 @@ function LiveApp() {
     }
   }, [transcripts]);
 
-  // Item-on-stage timer — resets whenever current item changes
-  useEffect(() => {
-    setItemSeconds(0);
-    if (!isListening) return;
-    const id = setInterval(() => setItemSeconds(s => s + 1), 1000);
-    return () => clearInterval(id);
-  }, [currentItemIdx, isListening]);
-
-  // Producer engine — context-aware suggestions based on flow + transcript + timing
-  const producerHint = useProducerEngine({ flowItems, currentItemIdx, transcripts, score, itemSeconds });
-
   const formatTime = (s: number) => {
-    const h = Math.floor(s / 3600).toString().padStart(2, "0");
-    const m = Math.floor((s % 3600) / 60).toString().padStart(2, "0");
+    const h = Math.floor(s / 3600)
+      .toString()
+      .padStart(2, "0");
+    const m = Math.floor((s % 3600) / 60)
+      .toString()
+      .padStart(2, "0");
     const sec = (s % 60).toString().padStart(2, "0");
     return `${h}:${m}:${sec}`;
   };
@@ -589,93 +635,6 @@ function LiveApp() {
           user-select: none;
         }
 
-        /* Flow strip */
-        .ru-flow-strip {
-          background: rgba(255,255,255,.04);
-          border: 1px solid rgba(255,255,255,.08);
-          border-radius: 16px;
-          padding: 0 14px;
-          height: 44px;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          flex-shrink: 0;
-          transition: border-color .3s;
-        }
-        .ru-flow-current {
-          display: flex;
-          align-items: center;
-          gap: 7px;
-          flex: 1;
-          min-width: 0;
-        }
-        .ru-flow-role-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 3px;
-          font-size: 10px;
-          font-weight: 900;
-          letter-spacing: .04em;
-          padding: 3px 7px;
-          border-radius: 8px;
-          flex-shrink: 0;
-        }
-        .ru-flow-name {
-          font-size: 13px;
-          font-weight: 900;
-          color: white;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-        .ru-flow-sep { color: rgba(255,255,255,.2); flex-shrink: 0; font-size: 12px; }
-        .ru-flow-next {
-          font-size: 11px;
-          color: #5a4f7a;
-          font-weight: 700;
-          white-space: nowrap;
-          flex-shrink: 0;
-          max-width: 90px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-        .ru-flow-done {
-          background: none;
-          border: 1px solid rgba(255,255,255,.12);
-          border-radius: 10px;
-          color: #8878b8;
-          font-family: inherit;
-          font-size: 11px;
-          font-weight: 800;
-          padding: 4px 10px;
-          cursor: pointer;
-          flex-shrink: 0;
-          transition: border-color .2s, color .2s;
-        }
-        .ru-flow-done:active:not(:disabled) { border-color: #55f59a; color: #55f59a; }
-        .ru-flow-done:disabled { opacity: .3; cursor: not-allowed; }
-
-        /* Producer-mode AI card */
-        .ru-ai-card.producer-active {
-          border-color: rgba(255,210,80,.22);
-          box-shadow: 0 0 28px rgba(255,180,60,.15);
-        }
-        .ru-ai-card.producer-active .ru-bot {
-          background: linear-gradient(135deg, #f59e0b, #ff6b35);
-          box-shadow: 0 0 22px rgba(245,158,11,.5);
-        }
-
-        /* Listening mode — transcript glows */
-        .ru-listening .ru-transcript-panel {
-          border-color: rgba(255,61,212,.18);
-          box-shadow: 0 0 14px rgba(255,61,212,.08);
-        }
-        .ru-listening .ru-transcript-interim {
-          color: rgba(255,255,255,.78);
-          border-left-color: rgba(255,61,212,.45);
-          font-style: normal;
-        }
-
         /* Keyframes */
         @keyframes ru-spin { to { transform: rotate(360deg); } }
         @keyframes ru-bars {
@@ -683,7 +642,7 @@ function LiveApp() {
           50%       { transform: scaleY(1.08); opacity: 1; }
         }
         @keyframes ru-slidein {
-          from { opacity: 0; transform: translateY(5px); }
+          from { opacity: 0; transform: translateY(6px); }
           to   { opacity: 1; transform: translateY(0); }
         }
 
@@ -701,41 +660,6 @@ function LiveApp() {
           .ru-scanner { padding: 10px; }
           .ru-nav { height: 64px; }
         }
-
-        /* Flow setup sheet (slide-up from bottom) */
-        .ru-flow-setup-sheet {
-          position: fixed;
-          bottom: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 100%;
-          max-width: 430px;
-          z-index: 101;
-          background: #0d0b1a;
-          border-radius: 26px 26px 0 0;
-          border: 1px solid rgba(255,255,255,.1);
-          border-bottom: none;
-          box-shadow: 0 -8px 60px rgba(120,40,255,.25);
-          animation: ru-slideup 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-          max-height: 92vh;
-          overflow-y: auto;
-          scrollbar-width: none;
-        }
-        .ru-flow-setup-sheet::-webkit-scrollbar { display: none; }
-        .ru-flow-setup-handle {
-          width: 40px;
-          height: 4px;
-          background: rgba(255,255,255,.15);
-          border-radius: 4px;
-          margin: 12px auto 0;
-        }
-        .ru-flow-setup-sheet .ru-setup {
-          height: auto;
-          min-height: unset;
-          padding-top: 14px;
-          padding-bottom: 36px;
-        }
-        .ru-nav-item.ru-flow-active { color: #ff3bd4; }
 
         /* Session summary overlay */
         .ru-overlay {
@@ -856,60 +780,25 @@ function LiveApp() {
         }
       `}</style>
 
-      <div className={`ru-app${isListening ? " ru-listening" : ""}`}>
+      <div className="ru-app">
         {/* Top bar */}
         <div className="ru-topbar">
           <div className="ru-live-badge">● LIVE</div>
-          <div className="ru-pill" data-testid="text-timer">{formatTime(seconds)}</div>
-          <div className="ru-pill" data-testid="text-viewers">👁 {viewers}</div>
-        </div>
-
-        {/* Show flow strip — only when items are set up */}
-        {flowItems.length > 0 && (
-          <div className="ru-flow-strip">
-            <div className="ru-flow-current">
-              {(() => {
-                const item = flowItems[currentItemIdx];
-                if (!item) return null;
-                const color = ROLE_COLORS[item.role];
-                return (
-                  <>
-                    <span
-                      className="ru-flow-role-pill"
-                      style={{ background: `${color}18`, border: `1px solid ${color}38`, color }}
-                    >
-                      {getRoleEmoji(item.role)}
-                    </span>
-                    <span className="ru-flow-name">{item.name}</span>
-                  </>
-                );
-              })()}
-            </div>
-            {flowItems[currentItemIdx + 1] && (
-              <>
-                <span className="ru-flow-sep">›</span>
-                <span className="ru-flow-next">{flowItems[currentItemIdx + 1].name}</span>
-              </>
-            )}
-            <button
-              className="ru-flow-done"
-              disabled={currentItemIdx >= flowItems.length - 1}
-              onClick={() => {
-                if (currentItemIdx < flowItems.length - 1) {
-                  setCurrentItemIdx(idx => idx + 1);
-                  setItemSeconds(0);
-                }
-              }}
-            >
-              Done ✓
-            </button>
+          <div className="ru-pill" data-testid="text-timer">
+            {formatTime(seconds)}
           </div>
-        )}
+          <div className="ru-pill" data-testid="text-viewers">
+            👁 {viewers}
+          </div>
+        </div>
 
         {/* Mic orb zone */}
         <div className="ru-mic-zone">
           <div className={`ru-wave left${isListening ? "" : " paused"}`}>
-            <span /><span /><span /><span />
+            <span />
+            <span />
+            <span />
+            <span />
           </div>
 
           <div
@@ -922,39 +811,40 @@ function LiveApp() {
               {isDenied
                 ? "Mic access denied"
                 : !isSupported
-                ? "Not supported"
-                : isListening
-                ? "RunUp is listening..."
-                : "Tap to start"}
+                  ? "Not supported"
+                  : isListening
+                    ? "RunUp is listening..."
+                    : "Tap to start"}
             </div>
             <div className="ru-mic-sub">
               {isDenied
                 ? "Allow mic in settings"
                 : !isSupported
-                ? "Use Chrome or Edge"
-                : isListening
-                ? "Tap to pause"
-                : "Mic is paused"}
+                  ? "Use Chrome or Edge"
+                  : isListening
+                    ? "Tap to pause"
+                    : "Mic is paused"}
             </div>
           </div>
 
           <div className={`ru-wave right${isListening ? "" : " paused"}`}>
-            <span /><span /><span /><span />
+            <span />
+            <span />
+            <span />
+            <span />
           </div>
         </div>
 
-        {/* AI / Producer suggestion card */}
-        <div className={`ru-ai-card${producerHint ? " producer-active" : ""}`}>
-          <div className="ru-bot">{producerHint ? "🎬" : "👾"}</div>
+        {/* AI suggestion card */}
+        <div className="ru-ai-card">
+          <div className="ru-bot">👾</div>
           <div>
-            <div className="ru-ai-label">
-              {producerHint ? producerHint.badge : "✦ AI SUGGESTION"}
-            </div>
+            <div className="ru-ai-label">✦ AI SUGGESTION</div>
             <div className="ru-ai-title" data-testid="text-ai-title">
-              {producerHint ? producerHint.title : ai.title}
+              {ai.title}
             </div>
             <div className="ru-ai-text" data-testid="text-ai-text">
-              {producerHint ? producerHint.text : ai.text}
+              {ai.text}
             </div>
           </div>
         </div>
@@ -984,21 +874,25 @@ function LiveApp() {
                 Mic denied — allow access in browser settings, then tap the orb.
               </div>
             )}
-            {isSupported && !isDenied && transcripts.length === 0 && !interimText && (
-              <div className="ru-transcript-empty">
-                {isListening ? "Listening… start talking." : "Tap the orb to start."}
-              </div>
-            )}
-            {transcripts
-              .filter((t, i) =>
-                i === 0 ||
-                t.text.toLowerCase().trim() !== transcripts[i - 1].text.toLowerCase().trim()
-              )
-              .map(t => (
-                <div key={t.id} className="ru-transcript-line" data-testid={`text-transcript-${t.id}`}>
-                  {t.text}
+            {isSupported &&
+              !isDenied &&
+              transcripts.length === 0 &&
+              !interimText && (
+                <div className="ru-transcript-empty">
+                  {isListening
+                    ? "Listening… start talking."
+                    : "Tap the orb to start."}
                 </div>
-              ))}
+              )}
+            {transcripts.map((t) => (
+              <div
+                key={t.id}
+                className="ru-transcript-line"
+                data-testid={`text-transcript-${t.id}`}
+              >
+                {t.text}
+              </div>
+            ))}
             {interimText && (
               <div className="ru-transcript-interim">{interimText}</div>
             )}
@@ -1010,7 +904,8 @@ function LiveApp() {
           <div className="ru-stat">
             <div className="ru-stat-label">MOMENTUM</div>
             <div className="ru-stat-main" data-testid="text-score">
-              {score}<small>/100</small>
+              {score}
+              <small>/100</small>
             </div>
             <div className="ru-barline">
               <div className="ru-barfill" style={{ width: `${score}%` }} />
@@ -1018,31 +913,15 @@ function LiveApp() {
           </div>
           <div className="ru-stat">
             <div className="ru-stat-label">ENERGY</div>
-            <div className={`ru-stat-main${score >= 83 ? " ru-green" : ""}`}>
-              {score >= 90 ? "Excellent" : score >= 83 ? "High" : score >= 76 ? "Good" : "Steady"}
-            </div>
-            <div className={`ru-stat-sub${score >= 83 ? " ru-green" : ""}`}>
-              {score >= 83 ? "Rising ↗" : "Steady →"}
-            </div>
+            <div className="ru-stat-main ru-green">High</div>
+            <div className="ru-stat-sub ru-green">Rising ↗</div>
           </div>
           <div className="ru-stat">
-            {flowItems.length > 0 ? (
-              <>
-                <div className="ru-stat-label">ITEM</div>
-                <div className="ru-stat-main">
-                  {currentItemIdx + 1}<small>/{flowItems.length}</small>
-                </div>
-                <div className="ru-stat-sub" style={{ color: "#aaa0bc" }}>
-                  {flowItems[currentItemIdx]?.role ?? "—"}
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="ru-stat-label red">HOT STREAK</div>
-                <div className="ru-stat-main">🔥 3</div>
-                <div className="ru-stat-sub" style={{ color: "#aaa0bc" }}>items</div>
-              </>
-            )}
+            <div className="ru-stat-label red">HOT STREAK</div>
+            <div className="ru-stat-main">🔥 3</div>
+            <div className="ru-stat-sub" style={{ color: "#aaa0bc" }}>
+              items
+            </div>
           </div>
         </div>
 
@@ -1051,14 +930,12 @@ function LiveApp() {
           <div className="ru-nav-item active" data-testid="nav-home">
             <span className="ru-nav-icon">⌂</span>Home
           </div>
-          <div
-            className={`ru-nav-item${flowItems.length > 0 ? " ru-flow-active" : ""}`}
-            data-testid="nav-flow"
-            onClick={() => setShowFlowSetup(true)}
-          >
-            <span className="ru-nav-icon">🎬</span>Flow
+          <div className="ru-nav-item" data-testid="nav-scanner">
+            <span className="ru-nav-icon">📷</span>Scanner
           </div>
-          <div className="ru-plus" data-testid="nav-plus" onClick={() => setShowFlowSetup(true)}>+</div>
+          <div className="ru-plus" data-testid="nav-plus">
+            +
+          </div>
           <div className="ru-nav-item" data-testid="nav-history">
             <span className="ru-nav-icon">◷</span>History
           </div>
@@ -1067,17 +944,6 @@ function LiveApp() {
           </div>
         </div>
       </div>
-
-      {/* Flow setup overlay */}
-      {showFlowSetup && (
-        <>
-          <div className="ru-overlay" onClick={() => setShowFlowSetup(false)} />
-          <div className="ru-flow-setup-sheet">
-            <div className="ru-flow-setup-handle" />
-            <FlowSetup onStart={handleSetupStart} />
-          </div>
-        </>
-      )}
 
       {/* Session summary overlay + slide-up card */}
       {showSummary && summary && (
@@ -1091,15 +957,22 @@ function LiveApp() {
 
               <div className="ru-summary-stats">
                 <div className="ru-summary-stat">
-                  <div className="ru-summary-stat-val">{summary.energyEmoji} {summary.energyRating}</div>
+                  <div className="ru-summary-stat-val">
+                    {summary.energyEmoji} {summary.energyRating}
+                  </div>
                   <div className="ru-summary-stat-label">Energy</div>
                 </div>
                 <div className="ru-summary-stat">
-                  <div className="ru-summary-stat-val">{summary.totalTriggers}</div>
+                  <div className="ru-summary-stat-val">
+                    {summary.totalTriggers}
+                  </div>
                   <div className="ru-summary-stat-label">Triggers</div>
                 </div>
                 <div className="ru-summary-stat">
-                  <div className="ru-summary-stat-val" style={{ fontSize: "13px" }}>
+                  <div
+                    className="ru-summary-stat-val"
+                    style={{ fontSize: "13px" }}
+                  >
                     {summary.topCategory === "None" ? "—" : summary.topCategory}
                   </div>
                   <div className="ru-summary-stat-label">Top Signal</div>
@@ -1116,10 +989,6 @@ function LiveApp() {
                 onClick={() => {
                   setShowSummary(false);
                   keywordHitsRef.current = {};
-                  setCurrentItemIdx(0);
-                  setItemSeconds(0);
-                  setSeconds(0);
-                  setFlowItems([]);
                 }}
               >
                 Start New Session
