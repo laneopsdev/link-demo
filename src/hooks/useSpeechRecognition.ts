@@ -1,4 +1,4 @@
-Speech
+
 import { useState, useEffect, useRef, useCallback } from "react";
 
 // Web Speech API type declarations (not in default TS lib)
