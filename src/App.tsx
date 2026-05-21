@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useSpeechRecognition } from "@/hooks/useSpeechRecognition";
-import { useSoundFX } from "@/hooks/useSoundFX";
+import { useSpeechRecognition } from "./hooks/useSpeechRecognition";
+import { useSoundFX } from "./hooks/useSoundFX";
 
 const queryClient = new QueryClient();
 
